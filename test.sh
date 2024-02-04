@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Get the list of all branches excluding 'main'
+branches=$(git branch --list 'branch-*' | cut -c 3-)
+
+# Loop through each branch
+for branch in "${branches[@]}"
+do
+    # Checkout the branch
+    git checkout $branch
+
+    # Create a file with branch name
+    touch "${branch}.txt"
+
+    # Stage the new file
+     git add "${branch}.txt"
+  
+
+    # Commit the file in the same branch
+      git commit -m "Add file for branch ${branch}"
+	  
+	  git push origin "${branch}"
+done
